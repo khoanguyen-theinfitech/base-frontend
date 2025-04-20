@@ -1,0 +1,243 @@
+---
+description: Guidelines for using MUI in the project
+globs: "**/*.tsx, **/*.ts"
+alwaysApply: false
+---
+
+# MUI Standards - Quick Reference
+
+## 🎨 Theme & Styling
+- Use theme from `app/theme/theme.ts`
+- NO hardcoded colors/styles - use theme.palette
+- Use `sx` prop for styling, NOT inline styles
+```tsx
+// ✅ CORRECT
+<Box sx={{ p: 2, bgcolor: 'primary.main' }}>
+
+// ❌ INCORRECT
+<div style={{ padding: '16px', backgroundColor: '#f8bbd0' }}>
+```
+
+## 🧱 Components
+- Use MUI components over HTML elements:
+  - `<Typography>` for text
+  - `<Button>` for buttons
+  - `<Box>` or `<Stack>` for layout
+  - `<TextField>` for inputs
+
+## 📱 Layout & Responsive
+```tsx
+// Stack for 1D layouts
+<Stack spacing={2} direction="column">
+
+// Grid for 2D layouts
+<Grid container spacing={2}>
+  <Grid item xs={12} md={6}>
+
+// Responsive
+<Box sx={{ width: { xs: '100%', md: '50%' } }}>
+```
+
+## 🎯 Quick Checklist
+1. ✓ MUI components only
+2. ✓ Theme colors & spacing
+3. ✓ `sx` prop for styles
+4. ✓ Responsive with breakpoints
+5. ✓ MUI icons from @mui/icons-material
+
+# Material-UI (MUI) Standards for Project
+
+## Core Principles
+
+### Theme Usage
+- ALWAYS use the project's theme configuration from `app/theme/theme.ts`
+- NEVER use hardcoded colors - use theme.palette values instead
+- NEVER override the default theme outside of `theme.ts`
+- Use theme.spacing() for consistent spacing values
+
+### Component Guidelines
+
+#### Required Practices
+- Use MUI components instead of HTML elements where possible
+  - Use `<Typography>` instead of `<h1>`, `<p>`, etc.
+  - Use `<Button>` instead of `<button>`
+  - Use `<Box>` or `<Stack>` for layout instead of `<div>`
+- Use `sx` prop for styling instead of inline styles or CSS
+- Use `<Grid>` or `<Stack>` for responsive layouts
+- Use theme breakpoints for responsive design
+
+#### Component Structure
+```tsx
+// ✅ CORRECT USAGE
+import { Box, Typography, Button } from '@mui/material';
+
+// Use sx prop for styling
+<Box sx={{ p: 2, display: 'flex', gap: 2 }}>
+  <Typography variant="h1">Title</Typography>
+  <Button variant="contained">Action</Button>
+</Box>
+
+// ❌ INCORRECT USAGE
+// Don't use HTML elements directly
+<div style={{ padding: '16px' }}>
+  <h1>Title</h1>
+  <button>Action</button>
+</div>
+```
+
+### Styling Standards
+
+#### Use sx Prop
+- Always use the `sx` prop for component-specific styling
+- Follow the theme spacing units (1 unit = 8px)
+```tsx
+// ✅ CORRECT
+<Box sx={{ p: 2, mt: 3, mb: 1 }}>
+
+// ❌ INCORRECT
+<Box style={{ padding: '16px', marginTop: '24px' }}>
+```
+
+#### Theme Colors
+- Use theme palette colors for consistency
+```tsx
+// ✅ CORRECT
+<Box sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}>
+
+// ❌ INCORRECT
+<Box sx={{ backgroundColor: '#f8bbd0', color: '#000' }}>
+```
+
+### Layout Components
+
+#### Stack Usage
+- Use `<Stack>` for one-dimensional layouts
+```tsx
+// ✅ CORRECT
+<Stack spacing={2} direction="column">
+  <Item />
+  <Item />
+</Stack>
+```
+
+#### Grid Usage
+- Use `<Grid>` for two-dimensional layouts
+```tsx
+// ✅ CORRECT
+<Grid container spacing={2}>
+  <Grid item xs={12} md={6}>
+    <Item />
+  </Grid>
+</Grid>
+```
+
+### Typography
+
+#### Text Components
+- Always use MUI Typography for text elements
+```tsx
+// ✅ CORRECT
+<Typography variant="h1">Title</Typography>
+<Typography variant="body1">Content</Typography>
+
+// ❌ INCORRECT
+<h1>Title</h1>
+<p>Content</p>
+```
+
+### Forms
+
+#### Form Components
+- Use MUI form components exclusively
+- Implement proper form validation
+```tsx
+// ✅ CORRECT
+<TextField 
+  required
+  error={!!error}
+  helperText={error}
+  label="Username"
+/>
+
+// ❌ INCORRECT
+<input 
+  type="text"
+  placeholder="Username"
+/>
+```
+
+### Icons
+
+#### Icon Usage
+- Use MUI icons from @mui/icons-material
+- Maintain consistent icon sizing
+```tsx
+// ✅ CORRECT
+import { AddCircle } from '@mui/icons-material';
+<AddCircle sx={{ fontSize: 24 }} />
+
+// ❌ INCORRECT
+<img src="add-icon.png" />
+```
+
+### Responsive Design
+
+#### Breakpoint Usage
+- Use theme breakpoints for responsive designs
+```tsx
+// ✅ CORRECT
+<Box
+  sx={{
+    width: {
+      xs: '100%',
+      sm: '50%',
+      md: '33%'
+    }
+  }}
+>
+
+// ❌ INCORRECT
+<Box sx={{ width: '100%' }}
+  style={{ '@media (min-width: 600px)': { width: '50%' } }}
+>
+```
+
+### Performance
+
+#### Import Optimization
+- Use specific imports to reduce bundle size
+```tsx
+// ✅ CORRECT
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
+// ❌ INCORRECT
+import { Button, TextField } from '@mui/material';
+```
+
+### Error Handling
+
+#### Form Validation
+- Always provide visual feedback using MUI components
+```tsx
+// ✅ CORRECT
+<TextField
+  error={hasError}
+  helperText={errorMessage}
+/>
+
+// ❌ INCORRECT
+<div className="error">Error message</div>
+```
+
+## Code Review Checklist
+
+Before submitting code, ensure:
+1. All UI components are MUI components
+2. Theme values are used for colors and spacing
+3. Responsive design uses theme breakpoints
+4. Component styling uses the sx prop
+5. No direct HTML elements where MUI components exist
+6. Proper typography variants are used
+7. Form components follow MUI patterns
+8. Icons are from @mui/icons-material 

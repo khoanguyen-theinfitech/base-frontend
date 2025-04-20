@@ -1,0 +1,68 @@
+---
+description: Rules for FE dev
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+# Cursor Common Rules
+
+## Common
+
+- Ensure there is no degradation related to any PR
+- Verify the project can be built successfully
+- Remove all console logs and debugger statements from the code
+- Ensure features cover both normal and abnormal cases
+
+## ReactJS/NextJS
+
+### Component Structure
+- Keep components small and JSX markup should be no more than 50 lines
+  - Follow SRP (Single Responsibility Principle): each component should do one thing
+  - Benefits: easier maintenance, better performance, reusability
+- Hooks must be declared at the top of components
+  - React requires hooks to be called in the same order in each render
+  - Placing hooks inside conditions or after changing logic can cause errors
+  - Helps React optimize rendering and manage component lifecycle efficiently
+
+### Code Quality
+- Fix all linter errors and format with prettier before pushing code
+- Resolve any React warnings reported in the console
+- Check re-render
+ 
+
+### Code Organization
+- Don't Repeat Yourself (DRY)
+  - Extract similar components into a common component with different props
+- Ensure code is in sync with existing code patterns
+  - Follow project naming conventions (e.g., camelCase for files)
+- Remove unused props and imports
+- Avoid hardcoded values, use constants instead
+- Notify the team leader when adding new packages from NPM
+
+### Optimization
+- Optimize with custom hooks
+  - Extract complex logic into custom hooks for cleaner components
+- Check dependencies of useCallback, useEffect, useMemo
+  - For useEffect:
+    - Include all dependencies when updating state
+    - Only ignore dependencies when you want useEffect to run once on mount
+  - For useCallback:
+    - Use to memoize functions passed as props or used in dependencies
+    - Don't overuse - only when necessary
+  - For useMemo:
+    - Use to memoize values to avoid recalculating expensive computations
+    - Use only when necessary
+- Create helper functions for repeated functionality
+- Clean up timers and event listeners in useEffect
+
+
+### Error Handling
+- Implement proper exception handling
+- Handle issues in a general and logical way
+  - Authentication issues should be handled at the server level with proper redirects
+
+### Internationalization
+- Ensure multilingual handling is implemented if the project supports multiple languages 
+- You can @ files here
+- You can use markdown but dont have to
