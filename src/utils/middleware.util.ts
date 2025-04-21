@@ -10,7 +10,10 @@ export const getSession = () => {
   }
 };
 
-export const isInvalidRole = (roles?: IRouter['roles'], userRole?: string) => {
+export const isInvalidRole = (
+  roles?: IRouter['roles'],
+  userRole?: NonNullable<IRouter['roles']>[number],
+) => {
   if (!roles?.length || !userRole) {
     return false;
   }
