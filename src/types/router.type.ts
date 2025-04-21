@@ -14,7 +14,7 @@ import { Routers } from '@/constants/router.constant';
 export interface IRouter {
   pattern: `/${string}`;
   private: boolean | undefined;
-  role: Array<string> | undefined;
+  roles: Array<string> | undefined;
   router: string | AnyFunction<string>;
 }
 
@@ -24,6 +24,6 @@ export type ArgsRouterFunction<N extends RouterNames, A = RouterResult<N>> =
   A extends AnyFunction<string> ? Parameters<A> : Array<any>;
 
 export interface URLPatternRouter extends Omit<IRouter, 'pattern'> {
-  name: RouterNames;
+  name: string;
   pattern: URLPattern;
 }
