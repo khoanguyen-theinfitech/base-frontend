@@ -7,13 +7,25 @@ const routers = {
     router: '/',
     pattern: '/',
     private: true,
-    role: undefined,
+    roles: undefined,
   },
   login: {
     private: false,
-    role: undefined,
+    roles: undefined,
     router: '/login',
     pattern: '/login',
+  },
+  profile: {
+    private: true,
+    roles: undefined,
+    router: '/profile',
+    pattern: '/profile',
+  },
+  '403': {
+    router: '/403',
+    pattern: '/403',
+    roles: undefined,
+    private: undefined,
   },
 } satisfies Record<string, IRouter>;
 
